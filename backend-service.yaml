@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: sqldb
+  labels:
+    app: kimal-mysql
+spec:
+  ports:
+  - port: 3306	
+  selector:
+    app: kimai-mysql
+  clusterIP: None

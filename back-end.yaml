@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kimai-backend
+spec:
+  selector:
+    matchLabels:
+      app: kimai-mysql
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: kimai-mysql
+    spec:
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms:
+            - matchExpressions:
+              - key: app
+                operator: In
+                values:
+                - kimai
+      containers:
+      - name: sqldb
+        image: mysql:5.7
+        volumeMounts:
+        - name: mysql-pv-volume
+          mountPath: /var/lib/mysql
+        - name: log-volume
+          mountPath: /var/log
+        ports:
+        - containerPort: 3306
+          name: mysql
+        env:
+        - name: MYSQL_DATABASE
+          value: kimai
+        - name: MYSQL_USER
+          value: kimaiuser
+        - name: MYSQL_PASSWORD
+          value: kimaipassword
+        - name: MYSQL_ROOT_PASSWORD
+          value: changemeplease
+      volumes:
+      - name: mysql-pv-volume
+        persistentVolumeClaim:
+          claimName: mysql-pv-claim
+      - name: log-volume
+        emptyDir: {}

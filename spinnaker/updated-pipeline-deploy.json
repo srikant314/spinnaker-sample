@@ -516,13 +516,12 @@
   ],
   "triggers": [
     {
-      "account": "gcr",
       "application": "gceme",
       "enabled": true,
       "organization": "my-test-project-201329",
       "pipeline": "61372c70-62af-422f-9565-e1975a758612",
       "registry": "gcr.io",
-      "repository": "my-test-project-201329/sample-app",
+      "repository": "gcr.io/my-test-project-201329/sample-app",
       "status": [
         "successful"
       ],

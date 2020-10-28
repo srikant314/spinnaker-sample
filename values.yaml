@@ -1,0 +1,22 @@
+mediawiki:
+  name: mediawiki
+  replicaCount: 1
+  container:
+    image: synctree/mediawiki
+    port: 8080
+    env:
+    - name: MEDIAWIKI_DB_TYPE
+      value: mysql
+    - name: MEDIAWIKI_DB_USER
+      value: app
+    - name: MEDIAWIKI_DB_PASSWORD
+      value: secure
+    - name: MEDIAWIKI_DB_HOST
+      value: sqldb:3306
+    service:
+      type: nodePort 
+      port: 30283
+      targetport:
+      nodeport: 
+ 
+       

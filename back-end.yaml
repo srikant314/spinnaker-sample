@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kimai-backend
+  name: media-backend
 spec:
   selector:
     matchLabels:
-      app: kimai-mysql
+      app: media-mysql
   replicas: 1
   template:
     metadata:
       labels:
-        app: kimai-mysql
+        app: media-mysql
     spec:
       affinity:
         nodeAffinity:
@@ -20,10 +20,10 @@ spec:
               - key: app
                 operator: In
                 values:
-                - kimai
+                - mediawiki
       containers:
       - name: sqldb
-        image: mysql:5.7
+        image: mysql:5.6
         volumeMounts:
         - name: mysql-pv-volume
           mountPath: /var/lib/mysql
@@ -34,13 +34,13 @@ spec:
           name: mysql
         env:
         - name: MYSQL_DATABASE
-          value: kimai
+          value: mediawiki
         - name: MYSQL_USER
-          value: kimaiuser
+          value: app
         - name: MYSQL_PASSWORD
-          value: kimaipassword
+          value: secure
         - name: MYSQL_ROOT_PASSWORD
-          value: changemeplease
+          value: secure
       volumes:
       - name: mysql-pv-volume
         persistentVolumeClaim:

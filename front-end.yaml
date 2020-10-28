@@ -1,16 +1,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kimai
+  name: mediawiki-frontend
 spec:
   selector:
     matchLabels:
-      app: kimai
+      app: mediawiki-frontend
   replicas: 1
   template:
     metadata:
       labels:
-        app: kimai
+        app: mediawiki-frontend
     spec:	
       affinity:
         nodeAffinity:
@@ -20,55 +20,30 @@ spec:
               - key: app
                 operator: In
                 values:
-                - kimai       
+                - mediawiki
       initContainers:
       - name: init-wait
         image: alpine
         command: ["sh", "-c", "for i in $(seq 1 300); do nc -zvw1 sqldb 3306 && exit 0 || sleep 3; done; exit 1"]
 
       containers:
-      - name: nginx
-        image: gcr.io/my-test-project-201329/kimai2_nginx:version4
+      - name: mediawiki
+        image: synctree/mediawiki
         ports:
-        - containerPort: 80
-        volumeMounts:
-        - name: kpub-pv-volume
-          mountPath: /opt/kimai/public
-
-      - name: kimai
-        image: kimai/kimai2
-        ports:
-        - containerPort: 9000
+        - containerPort: 8080
         env:
-        - name: APP_ENV
-          value: prod
-        - name: TRUSTED_HOSTS
-          value: localhost,10.128.0.35,34.67.28.27,10.128.0.34,34.68.246.253,10.128.0.33,35.224.76.200,kimai
-        - name: ADMINMAIL
-          value: admin@kimai.local
-        - name: ADMINPASS
-          value: changemeplease	
-        - name: DATABASE_URL
-          value: mysql://kimaiuser:kimaipassword@sqldb:3306/kimai
+        - name: MEDIAWIKI_DB_TYPE
+          value: mysql
+        - name: MEDIAWIKI_DB_USER
+          value: app
+        - name: MEDIAWIKI_DB_PASSWORD
+          value: secure
+        - name: MEDIAWIKI_DB_HOST
+          value: sqldb:3306
         volumeMounts:
-        - name: kpub-pv-volume
-          mountPath: /opt/kimai/public
-        - name: kvar-pv-volume
-          mountPath: /opt/kimai/var
-
-
-      - name: postfix
-        image: catatnight/postfix:latest
-        env:
-        - name: maildomain
-          value: neontribe.co.uk
-        - name: smtp_user
-          value: kimai:kimai
-
+        - name: media-pv-volume
+          mountPath: /var/www/html
       volumes:
-      - name: kpub-pv-volume
+      - name: media-pv-volume
         persistentVolumeClaim:
-          claimName: kpub-pv-claim
-      - name: kvar-pv-volume
-        persistentVolumeClaim:
-          claimName: kvar-pv-claim
+           claimName: media-pv-claim

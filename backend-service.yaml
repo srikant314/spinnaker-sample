@@ -3,10 +3,10 @@ kind: Service
 metadata:
   name: sqldb
   labels:
-    app: kimal-mysql
+    app: media-mysql
 spec:
   ports:
   - port: 3306	
   selector:
-    app: kimai-mysql
+    app: media-mysql
   clusterIP: None

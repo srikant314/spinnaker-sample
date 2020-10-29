@@ -1,7 +1,7 @@
 apiVersion: v1
 appVersion: 3.1.0
-description: mediawiki-app is an application that helps to create a webapplication like wikipedia to server different API requests.
-name: mediawiki-app
+description: mysql is an application database which supports relational database storage
+name: mysql
 home: https://github.com/srikant314/spinnaker-sample.git
 version: 1.2.9
 sources:
@@ -10,5 +10,5 @@ maintainers:
 - name: srikant Bonta
   email: bon.srik117@gmaill.com
 keywords:
-- mediawiki
+- mysql
 - storage

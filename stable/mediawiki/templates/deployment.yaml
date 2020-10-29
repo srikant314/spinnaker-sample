@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.mediawiki.name }}
+  labels:
+    app: {{ .Values.mediawiki.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      app: {{ .Values.mediawiki.name }}
+  template:
+    metadata:
+      labels:
+        app: {{ .Values.mediawiki.name }}
+    spec:
+      volumes:
+        - name: {{ .Values.mediawiki.volume.name }}
+          persistentVolumeClaim:
+            claimName: {{ .Values.mediawiki.volume.pvc.name }}
+      containers:
+        - name: {{ .Values.mediawiki.name }}
+          image: {{ .Values.mediawiki.container.image }}  
+          ports:
+            - containerPort: {{ .Values.mediawiki.container.port }}
+          volumeMounts:             
+            - name: {{ .Values.mediawiki.volume.name }}
+              mountPath: {{ .Values.mediawiki.volume.mountPath }} 

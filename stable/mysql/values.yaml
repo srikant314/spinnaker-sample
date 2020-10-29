@@ -1,0 +1,21 @@
+replicaCount: 1
+mysql:
+  name: mediawiki
+  container:
+    image: mysql:5.6
+    port: 3306
+    service:
+      type: ClusterIP
+      port: 3306
+    volume: 
+      name: mysql-pv-volume
+      kind: PersistentVolume
+      storage: 1Gi 
+      accessMode: ReadWriteMany
+      pdname: my-data-disk
+      fstype: ext4
+      pvc:
+       kind: PersistentVolumeClaim
+       name: mysql-pv-claim
+       accessMode: ReadWriteMany
+       storage: 500Mi

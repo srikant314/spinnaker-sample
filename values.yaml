@@ -15,8 +15,17 @@ mediawiki:
       value: sqldb:3306
     service:
       type: nodePort 
-      port: 30283
-      targetport:
-      nodeport: 
+      port: 80
+      targetport: 80
+      nodeport: 30283
+    volume: 
+      name: media-pv-volume
+      kind:PersistentVolume
+      mountPath: /var/www/html
+      pvc:
+       kind: PersistentVolumeClaim
+       name: media-pv-claim
+       accessMode: ReadWriteMany
+       storage: 500Mi
  
        

@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: {{ .Values.mediawiki.volume.kind }}
+metadata:
+  name: {{ .Values.mediawiki.volume.name }}
+spec:
+  storageClassName: {{ .Values.mediawiki.volume.name }}
+  capacity:
+    storage: {{ .Values.mediawiki.volume.storage }}
+  accessModes:
+    - {{ .Values.mediawiki.volume.accessmode }}
+  gcePersistentDisk:
+    pdName: {{ .Values.mediawiki.volume.pdname }}
+    fsType: {{ .Values.mediawiki.volume.fsType }}

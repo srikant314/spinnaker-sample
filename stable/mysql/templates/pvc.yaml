@@ -3,8 +3,9 @@ kind: {{ .Values.mysql.volume.pvc.kind }}
 metadata:
   name: {{ .Values.mysql.volume.pvc.name }}
 spec:
+  storageClassName: {{ .Values.mysql.volume.pvc.scname }}
   accessModes:
-    - {{ .Values.mysql.volume.pvc.accessMode }}
+    - {{ .Values.mysql.volume.pvc.accessmode }}
   resources:
     requests:
       storage: {{ .Values.mysql.volume.pvc.storage }}

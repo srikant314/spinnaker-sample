@@ -1,10 +1,11 @@
 mysql:
-  name: mediawiki
+  name: mysql
+  label: backend
   container:
     image: mysql:5.6
     port: 3306
     env:
-    - name: MYSQL_DATABAS
+    - name: MYSQL_DATABASE
       value: mediawiki
     - name: MYSQL_USER
       value: app
@@ -12,18 +13,22 @@ mysql:
       value: secure
     - name: MYSQL_ROOT_PASSWORD
       value: secure    
-    service:
+  service:
+      name: sqldb
       type: ClusterIP
       port: 3306
-    volume: 
+  volume: 
       name: mysql-pv-volume
       kind: PersistentVolume
       storage: 1Gi 
-      accessMode: ReadWriteMany
+      scname: manual
+      accessmode: ReadWriteMany
       pdname: my-data-disk
-      fstype: ext4
+      fsType: ext4
+      mountpath: /var/lib/mysql
       pvc:
-       kind: PersistentVolumeClaim
-       name: mysql-pv-claim
-       accessMode: ReadWriteMany
-       storage: 500Mi
+        kind: PersistentVolumeClaim
+        name: mysql-pv-claim
+        accessmode: ReadWriteMany
+        storage: 1G
+        scname: manual

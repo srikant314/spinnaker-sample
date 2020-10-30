@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: {{ .Values.mediawiki.name }}
   labels:
-    app: {{ .Values.mediawiki.name }}
+    app: {{ .Values.mediawiki.label }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Values.mediawiki.name }}
+      app: {{ .Values.mediawiki.label }}
   template:
     metadata:
       labels:
-        app: {{ .Values.mediawiki.name }}
+        app: {{ .Values.mediawiki.label }}
     spec:
       volumes:
         - name: {{ .Values.mediawiki.volume.name }}
@@ -25,4 +25,4 @@ spec:
             - containerPort: {{ .Values.mediawiki.container.port }}
           volumeMounts:             
             - name: {{ .Values.mediawiki.volume.name }}
-              mountPath: {{ .Values.mediawiki.volume.mountPath }} 
+              mountPath: {{ .Values.mediawiki.volume.mountpath }} 

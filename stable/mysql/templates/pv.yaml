@@ -3,7 +3,7 @@ kind: {{ .Values.mysql.volume.kind }}
 metadata:
   name: {{ .Values.mysql.volume.name }}
 spec:
-  storageClassName: {{ .Values.mysql.volume.name }}
+  storageClassName: {{ .Values.mysql.volume.scname }}
   capacity:
     storage: {{ .Values.mysql.volume.storage }}
   accessModes:

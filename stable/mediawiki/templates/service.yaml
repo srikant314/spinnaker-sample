@@ -5,7 +5,7 @@ metadata:
 spec:
   type: {{ .Values.mediawiki.service.type }}
   selector:             
-    app: {{ .Values.mediawiki.name }}
+    app: {{ .Values.mediawiki.label }}
   ports:
     - port: {{ .Values.mediawiki.service.port }}       
       targetPort: {{ .Values.mediawiki.service.targetport }}

@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: {{ .Values.mysql.name }}
   labels:
-    app: {{ .Values.mysql.name }}
+    app: {{ .Values.mysql.label }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: {{ .Values.mysql.name }}
+      app: {{ .Values.mysql.label }}
   template:
     metadata:
       labels:
-        app: {{ .Values.mysql.name }}
+        app: {{ .Values.mysql.label }}
     spec:
       volumes:
         - name: {{ .Values.mysql.volume.name }}
@@ -25,4 +25,4 @@ spec:
             - containerPort: {{ .Values.mysql.container.port }}
           volumeMounts:             
             - name: {{ .Values.mysql.volume.name }}
-              mountPath: {{ .Values.mysql.volume.mountPath }} 
+              mountPath: {{ .Values.mysql.volume.mountpath }} 

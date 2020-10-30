@@ -3,7 +3,7 @@ kind: {{ .Values.mediawiki.volume.kind }}
 metadata:
   name: {{ .Values.mediawiki.volume.name }}
 spec:
-  storageClassName: {{ .Values.mediawiki.volume.name }}
+  storageClassName: {{ .Values.mediawiki.volume.scname }}
   capacity:
     storage: {{ .Values.mediawiki.volume.storage }}
   accessModes:

@@ -3,8 +3,9 @@ kind: {{ .Values.mediawiki.volume.pvc.kind }}
 metadata:
   name: {{ .Values.mediawiki.volume.pvc.name }}
 spec:
+  storageClassName: {{ .Values.mediawiki.volume.pvc.scname }}
   accessModes:
-    - {{ .Values.mediawiki.volume.pvc.accessMode }}
+    - {{ .Values.mediawiki.volume.pvc.accessmode }}
   resources:
     requests:
       storage: {{ .Values.mediawiki.volume.pvc.storage }}

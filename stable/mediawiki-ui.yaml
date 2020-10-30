@@ -1,5 +1,6 @@
 mediawiki:
   name: mediawiki
+  label: frontend
   container:
     image: synctree/mediawiki
     port: 8080
@@ -11,21 +12,26 @@ mediawiki:
     - name: MEDIAWIKI_DB_PASSWORD
       value: secure
     - name: MEDIAWIKI_DB_HOST
-      value: mysql:3306
-    service:
-      type: nodePort 
+      value: localhost
+    - name: MEDIAWIKI_DB_PORT
+      value: 3306
+  service:
+      type: NodePort 
       port: 80
       targetport: 80
       nodeport: 30283
-    volume: 
+  volume: 
       name: media-pv-volume
       kind: PersistentVolume
-      storage: 500Mi 
-      accessMode: ReadWriteMany
+      storage: 1Gi 
+      scname: manual
+      accessmode: ReadWriteMany
       pdname: my-data-mediawiki
       fstype: ext4
+      mountpath: /var/www/html
       pvc:
        kind: PersistentVolumeClaim
        name: media-pv-claim
-       accessMode: ReadWriteMany
-       storage: 500Mi
+       accessmode: ReadWriteMany
+       storage: 1G
+       scname: manual

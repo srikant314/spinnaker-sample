@@ -2,7 +2,7 @@ mediawiki:
   name: mediawiki
   label: frontend
   container:
-    image: synctree/mediawiki
+    image: gcr.io/my-test-project-201329/mediawiki-test:v1
     port: 8080
     env:
     - key: MEDIAWIKI_DB_TYPE

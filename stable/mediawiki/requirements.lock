@@ -1,0 +1,6 @@
+dependencies:
+- name: mysql
+  repository: https://helm-native-chart-repo.storage.googleapis.com
+  version: 1.2.9
+digest: sha256:54bb7af33704d67b72e4b753847598301c5c78d35b1e8f4a11fb7557bbb3345e
+generated: "2020-11-01T18:35:02.182905563Z"

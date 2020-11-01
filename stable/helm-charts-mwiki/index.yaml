@@ -1,0 +1,23 @@
+apiVersion: v1
+entries:
+  mysql:
+  - apiVersion: v1
+    appVersion: 3.1.0
+    created: "2020-11-01T14:32:33.061424681Z"
+    description: mysql is an application database which supports relational database
+      storage
+    digest: d0a11275ba2a522e108c2e6d7a226f968866198e55aad19a76b3072eee7b0680
+    home: https://github.com/srikant314/spinnaker-sample.git
+    keywords:
+    - mysql
+    - storage
+    maintainers:
+    - email: bon.srik117@gmaill.com
+      name: srikant Bonta
+    name: mysql
+    sources:
+    - https://github.com/srikant314/spinnaker-sample.git
+    urls:
+    - https://helm-native-chart-repo.storage.googleapis.com/mysql-1.2.9.tgz
+    version: 1.2.9
+generated: "2020-11-01T14:32:33.060789629Z"

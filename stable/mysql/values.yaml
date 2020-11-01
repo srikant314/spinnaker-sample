@@ -1,14 +1,35 @@
-replicaCount: 1
 mysql:
   name: mysql
-  replicaCount: 1
+  label: backend
   container:
     image: mysql:5.6
     port: 3306
     env:
-    - key: key
-      value: value
+    - key: MYSQL_DATABASE
+      value: mediawiki
+    - key: MYSQL_USER
+      value: app
+    - key: MYSQL_PASSWORD
+      value: secure
+    - key: MYSQL_ROOT_PASSWORD
+      value: secure
   service:
-    type: ClusterIP
-    port: 3306
+      name: sqldb
+      type: ClusterIP
+      port: 3306
+  volume:
+      name: mysql-pv-volume
+      kind: PersistentVolume
+      storage: 1Gi
+      scname: manual
+      accessmode: ReadWriteMany
+      pdname: my-data-disk
+      fsType: ext4
+      mountpath: /var/lib/mysql
+      pvc:
+        kind: PersistentVolumeClaim
+        name: mysql-pv-claim
+        accessmode: ReadWriteMany
+        storage: 1G
+        scname: manual
 

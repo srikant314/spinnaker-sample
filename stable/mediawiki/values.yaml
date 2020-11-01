@@ -1,23 +1,26 @@
-replicaCount: 1
 mediawiki:
   name: mediawiki
+  replicaCount: 1
   container:
     image: synctree/mediawiki
     port: 8080
-    service:
-      type: nodePort 
-      port: 80
-      targetport: 80
-      nodeport: 30283
-    volume: 
-      name: media-pv-volume
-      kind: PersistentVolume
-      storage: 500Mi 
+    env:
+    - key: key
+      value: value
+  service:
+    type: nodePort 
+    port: 80
+    targetport: 80
+    nodeport: 30283
+  volume: 
+    name: media-pv-volume
+    kind: PersistentVolume
+    storage: 500Mi 
+    accessMode: ReadWriteMany
+    pdname: my-data-mediawiki
+    fstype: ext4
+    pvc:
+      kind: PersistentVolumeClaim
+      name: media-pv-claim
       accessMode: ReadWriteMany
-      pdname: my-data-mediawiki
-      fstype: ext4
-      pvc:
-       kind: PersistentVolumeClaim
-       name: media-pv-claim
-       accessMode: ReadWriteMany
-       storage: 500Mi
+      storage: 500Mi

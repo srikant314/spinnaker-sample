@@ -5,13 +5,13 @@ mysql:
     image: mysql:5.6
     port: 3306
     env:
-    - name: MYSQL_DATABASE
+    - key: MYSQL_DATABASE
       value: mediawiki
-    - name: MYSQL_USER
+    - key: MYSQL_USER
       value: app
-    - name: MYSQL_PASSWORD
+    - key: MYSQL_PASSWORD
       value: secure
-    - name: MYSQL_ROOT_PASSWORD
+    - key: MYSQL_ROOT_PASSWORD
       value: secure    
   service:
       name: sqldb

@@ -5,15 +5,15 @@ mediawiki:
     image: synctree/mediawiki
     port: 8080
     env:
-    - name: MEDIAWIKI_DB_TYPE
+    - key: MEDIAWIKI_DB_TYPE
       value: mysql
-    - name: MEDIAWIKI_DB_USER
+    - key: MEDIAWIKI_DB_USER
       value: app
-    - name: MEDIAWIKI_DB_PASSWORD
+    - key: MEDIAWIKI_DB_PASSWORD
       value: secure
-    - name: MEDIAWIKI_DB_HOST
-      value: localhost
-    - name: MEDIAWIKI_DB_PORT
+    - key: MEDIAWIKI_DB_HOST
+      value: sqldb
+    - key: MEDIAWIKI_DB_PORT
       value: 3306
   service:
       type: NodePort 

@@ -6,8 +6,8 @@ mysql:
     image: mysql:5.6
     port: 3306
     env:
-       - key: key
-         value: value
+    - key: key
+      value: value
   service:
     type: ClusterIP
     port: 3306

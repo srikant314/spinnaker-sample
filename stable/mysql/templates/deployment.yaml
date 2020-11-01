@@ -22,9 +22,9 @@ spec:
         - name: {{ .Values.mysql.name }}
           image: {{ .Values.mysql.container.image }}
           env:
-            {{- range .Values.mysql.container.env }}
-            - name: {{ .key }}
-              value: {{ .value }}
+            {{- range .Values.mysql.container.env}}
+            - name: {{ .key}}
+              value: {{ .value}}
             {{- end}}
           ports:
             - containerPort: {{ .Values.mysql.container.port }}

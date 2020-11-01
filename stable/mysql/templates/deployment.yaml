@@ -5,7 +5,7 @@ metadata:
   labels:
     app: {{ .Values.mysql.label }}
 spec:
-  replicas: {{ .Values.replicaCount }}
+  replicas: {{ .Values.mysql.replicaCount }}
   selector:
     matchLabels:
       app: {{ .Values.mysql.label }}
@@ -20,7 +20,12 @@ spec:
             claimName: {{ .Values.mysql.volume.pvc.name }}
       containers:
         - name: {{ .Values.mysql.name }}
-          image: {{ .Values.mysql.container.image }}  
+          image: {{ .Values.mysql.container.image }}
+          env:
+            {{- range .Values.mysql.container.env }}
+            - name: {{ .key }}
+              value: {{ .value }}
+            {{- end}}
           ports:
             - containerPort: {{ .Values.mysql.container.port }}
           volumeMounts:             
